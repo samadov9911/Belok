@@ -88,26 +88,50 @@ while t <= 5400:
     Vy = Vy + (k[3][0] + 2.0 * k[3][1] + 2.0 * k[3][2] + k[3][3]) / 6.0
     ax = ax + (k[4][0] + 2.0 * k[4][1] + 2.0 * k[4][2] + k[4][3]) / 6.0
 
-plt.plot(x_list, y_list)
+
+plt.plot(x_list, y_list, label = 'Траектория относительного движения')
+plt.legend(loc=4)
+plt.xlabel('X, км')
+plt.ylabel('Y, км')
 plt.grid()
 plt.show()
 
-plt.plot(t_list, x_list)
+
+plt.plot(t_list, x_list, label = 'Метематическое ожидание Mx')
+plt.legend()
+plt.xlabel('Время (секунда)')
+plt.ylabel('Mx(t), км')
 plt.grid()
 plt.show()
 
-plt.plot(t_list, Vx_list)
+plt.plot(t_list, Vx_list, label = 'Метематическое ожидание M_Vx')
 plt.grid()
+plt.xlabel('Время (секунда)')
+plt.ylabel('M_Vx(t), км')
+plt.legend()
 plt.show()
 
-plt.plot(t_list, y_list)
+
+
+
+plt.plot(t_list, y_list, label = 'Метематическое ожидание My')
 plt.grid()
+plt.xlabel('Время (секунда)')
+plt.ylabel('My (t), км')
+plt.legend()
 plt.show()
 
-plt.plot(t_list, Vy_list)
+plt.plot(t_list, Vy_list, label = 'Метематическое ожидание M_Vy')
 plt.grid()
+plt.xlabel('Время (секунда)')
+plt.ylabel('M_Vy(t), км')
+plt.legend()
 plt.show()
 
-plt.plot(t_list, ax_list)
+
+plt.plot(t_list, ax_list, label = 'Метематическое ожидание Max')
+plt.legend()
+plt.xlabel('Время (секунда)')
+plt.ylabel('Max(t), км')
 plt.grid()
 plt.show()
