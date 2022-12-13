@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 w = 1.133 * pow(10, -3)
 
@@ -27,6 +28,13 @@ def dax(x_, y_, Vx_, Vy_, ax_):  # k4
 
     return 0
 
+#Нахождение начальных условий
+mu=396602
+H=400
+R0=(6371+H)
+omega=math.sqrt(mu/R0**3)
+V=math.sqrt(mu/R0)
+
 
 k = np.zeros((5, 4))
 h = 50
@@ -39,6 +47,22 @@ y = 0
 Vx = 0
 Vy = 2.833 * pow(10, -3)
 ax = 3.518 * pow(10, -18)
+
+#Матрица A
+A=np.array([[0, 0, 1, 0, 0],
+            [0, 0, 0,  1, 0],
+            [0, 0, 0, -2*omega,  1],
+            [0, 3*omega**2, 2*omega, 0, 0],
+            [0, 0, 0, 0, 0]])
+
+#Матрица A transpose
+omega=1
+AA=np.transpose([[0, 0, 1, 0, 0],
+            [0, 0, 0,  1, 0],
+            [0, 0, 0, -2*omega,  1],
+            [0, 3*omega**2, 2*omega, 0, 0],
+            [0, 0, 0, 0, 0]])
+
 
 
 #Корреляционные коэффициенты
@@ -121,8 +145,6 @@ plt.legend()
 plt.show()
 
 
-
-
 plt.plot(t_list, y_list, label = 'Метематическое ожидание My')
 plt.grid()
 plt.xlabel('Время (секунда)')
@@ -147,10 +169,29 @@ plt.show()
 
 
 
-K=np.array([[D1, K1, K2, K3, K4],
+Kmat=np.array([[D1, K1, K2, K3, K4],
             [K5, D2, K6,  K7, K8],
             [K9, K10, D3, K11,  K12],
             [K13, K14, K15, D4, K16],
             [K17, K18, K19, K20, D5]])
+
+a = np.array(A)
+b = np.array(K)
+total1 = a.dot(b)
+print(total)
+
+
+KK=A*K+K*AA
 print(K)
+print(A)
+print(AA)
+print('--')
+print(Kmat)
+
+#Нахождения дисперсий методом Ранги-Кутты
+
+h = 50
+
+
+
 
