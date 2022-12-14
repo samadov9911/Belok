@@ -63,113 +63,186 @@ def core():
 
 
 
-    plt.plot(time, results[:,0]/1000000)
-    #plt.legend()
+    plt.plot(time, results[:,0]/10e6)
     plt.xlabel('Время (секунда)')
     plt.ylabel('Dx(t), км^2')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 5]*10**(-6))
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('D_Vx(t), км^2/с^2')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 9]*10**(-6))
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('Dy(t), км^2')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 12]*10**(-6))
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('D_Vy(t), км^2/c^2')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 14])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('Dax(t)')
     plt.grid()
     plt.show()
 
-#Correlation graph
+    #Correlation graph
+
+    r_xy = results[:,2]/np.sqrt(results[:,0]*results[:,9])
+'''
+    r_xVx = results[:,1]/np.sqrt(results[:,0]*results[:,5])
+
+    r_yVy = results[:,10]/np.sqrt(results[:,9]*results[:,12])
+
+    r_xVy = results[:,3]/np.sqrt(results[:,0]*results[:,12])
+
+    r_yVx = results[:,6]/np.sqrt(results[:,9]*results[:,5])
+
+    r_VxVy = results[:,7]/np.sqrt(results[:,5]*results[:,12])
+
+    r_xax = results[:,4]/np.sqrt(results[:,0]*results[:,14])
+
+    r_yax = results[:,11]/np.sqrt(results[:,9]*results[:,14])
+
+    r_Vxax = results[:,8]/np.sqrt(results[:,5]*results[:,14])
+
+    r_Vyax = results[:,13]/np.sqrt(results[:,12]*results[:,14])
+'''
     plt.plot(time, results[:, 2])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('rxy')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 1])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_xVx')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 10])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_yVy')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 3])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_xVy')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 6])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('D_yVx')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 7])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_xVy')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 4])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_xax')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 11])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_yax')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 8])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_Vxax')
     plt.grid()
     plt.show()
 
     plt.plot(time, results[:, 13])
-    # plt.legend()
     plt.xlabel('Время (секунда)')
     plt.ylabel('r_Vyax')
     plt.grid()
     plt.show()
 
 
+
+
+
+
+
+'''
+    plt.plot(time, results[:, 2])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('rxy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 1])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xVx')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 10])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_yVy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 3])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xVy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 6])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('D_yVx')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 7])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xVy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 4])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xax')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 11])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_yax')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 8])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_Vxax')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 13])
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_Vyax')
+    plt.grid()
+    plt.show()
+
+'''
 
 def diffs(args):
 
