@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -10,43 +11,41 @@ def core():
     global velocity
     global deltaQ
 
+    mu = 398602
+    altitude= 400
+    radius_earth=6371
 
-    '''
-    0 - radius
-    1 - time
-    2 - radial speed
-    3 - angular speed
-    4 - mass
-    '''
-
-    mu = 398.6e12
-    radius_earth=6371*10**3
-    altitude=400*10**3
     omega = np.sqrt(mu/(radius_earth+altitude)**3)
     velocity=np.sqrt(mu/(radius_earth+altitude))
-    density=5.934
-    deltaQ=0.02*10**(-6)
+    density=5.934*10**(-12)
+    deltaQ=0.02#*10**(-6)
 
     vars = np.zeros(20)
-    vars[0] = 100*10**(-6)
+    vars[0] =100#*10**(-6)
     vars[1] = 0.5
     vars[2]= 0.2
-    vars[5] = 0.01*10**(-6)
-    vars[9] = 100*10**(-6)
+    vars[5] =0.01#*10**(-6)
+    vars[9] =100#*10**(-6)
     vars[10] = 0.5
-    vars[12] =0.01*10**(-6)
-    vars[14] =3.518*10**(-19)
-    vars[15] =5000
-    vars[18] =0.5*omega*5000
-    vars[19] =3.518*10**(-18)
+    vars[12] =0.01#*10**(-6)
+    vars[13] = density
+    vars[14] =3.518*10**(-18)
+    vars[15] =5#*10**(-7)
+    vars[18] =0.5*omega*vars[15]
+    vars[19] =3.518 * pow(10, -19)
 
 
-    t= 0
+    t = 0
     h = 50
 
-    k = np.zeros((20, 4))
+    k = np.zeros((20,4))
 
+    results = vars
+
+    time = list()
+    time.append(0)
     while t <= 5400:
+
 
         k[:, 0] = diffs(vars)
         k[:, 1] = diffs(vars + k[:, 0] / 2)*2
@@ -57,8 +56,118 @@ def core():
         dvars = [sum(elem) for elem in k]
         vars += dvars
 
+        results = np.vstack([results, vars])
+        time.append(t)
+
         t += h
 
+
+
+    plt.plot(time, results[:,0]/1000000)
+    #plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('Dx(t), км^2')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 5]*10**(-6))
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('D_Vx(t), км^2/с^2')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 9]*10**(-6))
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('Dy(t), км^2')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 12]*10**(-6))
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('D_Vy(t), км^2/c^2')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 14])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('Dax(t)')
+    plt.grid()
+    plt.show()
+
+#Correlation graph
+    plt.plot(time, results[:, 2])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('rxy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 1])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xVx')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 10])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_yVy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 3])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xVy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 6])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('D_yVx')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 7])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xVy')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 4])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_xax')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 11])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_yax')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 8])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_Vxax')
+    plt.grid()
+    plt.show()
+
+    plt.plot(time, results[:, 13])
+    # plt.legend()
+    plt.xlabel('Время (секунда)')
+    plt.ylabel('r_Vyax')
+    plt.grid()
+    plt.show()
 
 
 
